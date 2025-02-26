@@ -1,7 +1,5 @@
 ## MyoFiles
 
-## MyoFiles
-
 Uma plataforma de vendas onde qualquer pessoas (com registro) pode comprar/vender arquivos para outras pessoas.
 
 ## Tecnologias
@@ -28,6 +26,3 @@ cd example-app
 npm install && npm run build
 composer run dev
 ```
-
-
-Uma plataforma de vendas onde qualquer pessoas (com registro) pode comprar/vender arquivos para outras pessoas.
