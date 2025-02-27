@@ -16,9 +16,10 @@ class UserController extends Controller
         $this->service = $service;
     }
 
-    public function show(User $user)
+    public function show($user)
     {
-        // TODO: Fazer a página dos usuários
+        $user = User::where('name', $user)->firstOrFail();
+        return view('users.show', ['user'=> $user]);
     }
     public function details() {
         return view('users.details');

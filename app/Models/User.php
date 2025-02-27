@@ -9,4 +9,8 @@ class User extends Authenticatable
     protected $fillable = ['name', 'email', 'password'];
 
     protected $hidden = ['password'];
+
+    public function product() {
+        return $this->hasMany(Product::class, 'user_id');
+    }
 }

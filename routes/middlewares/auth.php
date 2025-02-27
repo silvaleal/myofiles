@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('licenses/add/{user}/{license}', [LicenseController::class, 'store']);
 
+    Route::get('user/{user}', [UserController::class,'show'])->name('user.show');
+
     Route::resource('product', ProductController::class);
 });
