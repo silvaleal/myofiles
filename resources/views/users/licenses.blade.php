@@ -12,9 +12,7 @@
                             <a href="{{ route('product.show', $license->product) }}">
                                 <h2 class="text-lg font-semibold">{{ $license->product->name }}</h2>
                             </a>
-                            <p class="text-sm text-gray-400">
-                                {{ $license->user->name }} • Última atualização: {{ $license->product->updated_at }}
-                            </p>
+                            <p class="text-sm text-gray-400">{{ $license->user->name }}</p>
                         </div>
                     </div>
                 </div>

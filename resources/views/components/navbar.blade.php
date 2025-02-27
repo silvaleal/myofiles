@@ -4,8 +4,8 @@
     @if (Auth::check())
 
     <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation" class="text-white 
-          font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex 
-          items-center dark:focus:ring-blue-800" type="button">
+        font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex 
+        items-center dark:focus:ring-blue-800" type="button">
       {{ Auth::user()->name }}
     </button>
 
@@ -15,12 +15,12 @@
       <div>
         <li>
         <a href="{{ route('account.details') }}"
-          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detalhes</a>
+          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Financeiro</a>
         <a href="{{ route('account.security') }}"
-          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Segurança</a>
+          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Perfil</a>
         <a href="{{ route('account.licenses') }}"
           class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produtos</a>
-        <a href="{{ route('cart.index') }}"
+        <a href="{{ route('cart') }}"
           class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Carrinho</a>
         </li>
       </ul>
@@ -32,7 +32,6 @@
         class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Desconectar</a>
       </div>
     </div>
-KW
   @else
 
   <div class="flex gap-1">

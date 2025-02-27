@@ -1,5 +1,7 @@
 ## MyoFiles
 
+> Atenção: Este projeto não foi finalizado, ainda estou trabalhando nele para os meus estudos no framework Laravel 11. Qualquer sugestão é bem-vinda.
+
 Uma plataforma de vendas onde qualquer pessoas (com registro) pode comprar/vender arquivos para outras pessoas.
 
 ## Tecnologias

@@ -3,6 +3,8 @@
             <div class="mb-6">
                 <h1 class="text-2xl font-semibold text-white">Informações de Segurança</h1>
             </div>
+            <!-- Alterar Email -->
+            @include('components.forms.email-edit')
 
             <!-- Atualizar Apelido -->
             @include('components.forms.name-edit')
@@ -10,7 +12,5 @@
             <!-- Alterar Senha -->
             @include('components.forms.password-edit')
 
-            <!-- Alterar Email -->
-            @include('components.forms.email-edit')
         </div>
 </x-account-layout>

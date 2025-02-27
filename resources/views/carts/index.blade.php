@@ -26,7 +26,7 @@
                                         <td class="p-3">{{ $item->product->category->name }}</td>
                                         <td class="p-3">R${{ number_format($item->product->price, 2) }}</td>
                                         <td class="p-3">
-                                            <form action="{{ route('cart.destroy', $item) }}" method="post">
+                                            <form action="{{ route('cart.remove', $item) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="text-red-500"> Deletar</button>
@@ -47,7 +47,7 @@
                         <span>Preço final:</span>
                         <span>R$ {{ number_format($totalPrice, 2) }}</span>
                     </div>
-                    <x-stripe-button></x-stripe-button>
+                    <x-stripe-button disabled="{{ $totalPrice ? true : false }}" />
                 </div>
                 <div class="bg-gray-800 p-4 rounded-lg mb-5">
                     <h2 class="text-xl font-semibold mb-4">Como entregamos?</h2>

@@ -1,24 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UserSecurityController extends Controller
+class UserService
 {
-    public function index()
-    {
-        return view('users.security');
+    // Métodos para atualizações
+    public function changeName(Request $request) {
+        $validated = $request->validate([
+            'name'=> ['required','string','min:5', 'max:20'],
+        ]);
+        Auth::user()->update(['name'=>$validated['name']]);
+        return back();
     }
-
-    public function update(Request $request)
+    public function changeEmail(Request $request) {
+        dd($request);
+    }
+    public function changePassword(Request $request)
     {
         $validated = $request->validate([
             "old_password" => ["required","string","min:5", "max:20"],
             "new_password" => ["required","string","min:5", "max:20"],
         ]);
+
         if (Hash::check($validated['old_password'], Auth::user()->password)) {
             return back()->with("error","Senha atual incorreta");
         }
@@ -29,4 +36,10 @@ class UserSecurityController extends Controller
         return back()->with('success','Senha alterada com sucesso.');
     }
 
+    public function logout() {
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return to_route('home');
+    }
 }

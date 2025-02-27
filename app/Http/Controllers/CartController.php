@@ -4,65 +4,47 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\CartService;
 use App\Models\Cart;
-use Illuminate\Http\Request;
+use App\Models\License;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected CartService $service;
+
+    public function __construct(CartService $service) {
+        $this->service = $service;
+    }
+
     public function index()
     {
         return view('carts.index', ["items"=>CartService::get(Auth::user())]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function add(Product $product)
     {
-        //
+        if (Cart::where("product_id", $product->id)
+            ->where("user_id", Auth::user()->id)->count() >0) {
+                return back()->with("error","Item já no carrinho");
+        }
+
+        if (License::where("product_id", $product->id)
+            ->where('user_id', Auth::user()->id)->count() >0) {
+                return back()->with("error","Você já comprou este item");
+        }
+
+        if (Product::where('id', $product->id)
+            ->where('user_id', Auth::user()->id)->count() > 0) {
+                return back()->with("error","Você não pode adicionar seu próprio produto no carrinho");
+        }
+
+        $this->service->add($product->id);
+        return to_route("cart");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        CartService::add($request->productId, $request->quantify);
-        return to_route("cart.index");
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cart $cart)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cart $cart)
+    public function remove(Cart $cart)
     {   
-        Cart::destroy($cart->id);
+        $this->service->remove($cart);
         return back()->with("success","Item removido com sucesso");
     }
 }
