@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\License;
 use App\Models\Payment;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
 use Request;
 
@@ -33,7 +34,7 @@ class PaymentService
             ];
             $metadatas[$product->id] = json_encode([
                 'product_id' => $product->id,
-                'user_id' => 1
+                'user_id' => Auth::user()->id
             ]);
         }
 
