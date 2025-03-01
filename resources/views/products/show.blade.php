@@ -22,17 +22,29 @@
                     </div>
                 </div>
             </section>
-            <aside class="w-full lg:w-1/4 lg:float-right">
-                <div class="bg-gray-800 p-4 rounded-lg mb-4">
-                    <h3 class="text-lg font-bold">
-                        Compre este produto
-                    </h3>
-                    <p class="text-2xl font-bold">
-                        R${{ number_format($product->price, 2) }}
-                    </p>
-                    <x-product-button :product="$product"></x-product-button>
-                </div>
-            </aside>
+            @if (isset($product->license[0]))
+                <aside class="w-full lg:w-1/4 lg:float-right">
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h3 class="text-lg font-bold">
+                            Baixar seu arquivo
+                        </h3>
+                        <p>Você comprou a licença vitalícia deste produto. Baixe o arquivo e usufrua da sua compra</p>
+                        <a href="{{ route('download.file', $product->id) }}">Baixar arquivo</a>
+                    </div>
+                </aside>
+            @else
+                <aside class="w-full lg:w-1/4 lg:float-right">
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h3 class="text-lg font-bold">
+                            Compre este produto
+                        </h3>
+                        <p class="text-2xl font-bold">
+                            R${{ number_format($product->price, 2) }}
+                        </p>
+                        <x-product-button :product="$product"></x-product-button>
+                    </div>
+                </aside>
+            @endif
         </div>
     </div>
 </x-app-layout>
