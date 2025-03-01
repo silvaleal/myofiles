@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,12 +28,15 @@ class UserService
         ]);
 
         if (Hash::check($validated['old_password'], Auth::user()->password)) {
-            return back()->with("error","Senha atual incorreta");
+            return back()->with("error","Esta já é a sua senha atual.");
         }
 
         if ($validated['old_password'] == $validated['new_password']) {
             return back()->with('error','Você já utiliza esta senha.');
         }
+
+        User::where('id', Auth::user()->id)->update(['password'=>Hash::make($validated['new_password'])]);
+
         return back()->with('success','Senha alterada com sucesso.');
     }
 
