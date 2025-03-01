@@ -22,6 +22,7 @@ class UserService
     }
     public function changePassword(Request $request)
     {
+        ## Trocando a senha do usuário
         $validated = $request->validate([
             "old_password" => ["required","string","min:5", "max:20"],
             "new_password" => ["required","string","min:5", "max:20"],
